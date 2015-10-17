@@ -81,7 +81,7 @@ reports.quiz_temporal = {
 	            plotShadow: false
 	        },
 	        title: {
-	            text: 'Modules',
+	            text: 'Modules Evaluation',
 	            align: 'center',
 	            verticalAlign: 'middle',
 	            y: 0

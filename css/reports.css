@@ -26,7 +26,7 @@
   margin-right: -21px;
 }
 
-#quiz-chart, #quiz-chart1 {
+#quiz-chart, #quiz-chart1, #mid-semester-pie, #mid-semester-plot {
 	width: 40%;
 	height: 400px;
 	float: left;

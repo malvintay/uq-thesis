@@ -105,6 +105,40 @@ switch ($_GET['report_type']) {
 		}
 		
 		break;
+		
+		
+	case 'mid_semester_pie':
+		
+		require 'data_mid_semester.php';
+		
+		$user_id = ($_GET['userId'] == 'false' || ! $_GET['userId'] ? FALSE : $_GET['userId']);
+		
+		$data = midSemesterPie($user_id);
+		$output->data = $data;
+		
+		if ($data['error'] == 1) {
+			$output->error = 1;
+			$output->data = $data['message'];
+		}
+		
+		break;
+		
+	case 'mid_semester_plot':
+		
+		require 'data_mid_semester.php';
+		
+		$user_id = ($_GET['userId'] == 'false' || ! $_GET['userId'] ? FALSE : $_GET['userId']);
+		
+		$data = midSemesterPlot($user_id);
+		$output->data = $data;
+		
+		if ($data['error'] == 1) {
+			$output->error = 1;
+			$output->data = $data['message'];
+		}
+		
+		break;
+		
 }
 
 echo json_encode($output);
