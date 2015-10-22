@@ -77,14 +77,26 @@ function trimSequences($rangeDays = 1, $user_id = FALSE, $data) {
 		$range = (strtotime($rangeDays[1]) - strtotime($rangeDays[0])) / 86400;
 	
 		if ($range < 2) {
-			$res = mysql_query("SELECT CONCAT(HOUR(`timestamp`), ':00') AS hour, COUNT(*) / 17 AS sequences FROM $db_table WHERE ".($user_id ? "anonID = '$user_id' AND " : '')." `timestamp` BETWEEN '{$rangeDays[0]}' AND '{$rangeDays[1]}' AND (item = 'Learning Pathway' OR parentitem = 'Learning Pathway') GROUP BY HOUR(`timestamp`)");
+			$res = mysql_query("SELECT CONCAT(HOUR(`timestamp`), ':00') AS hour, COUNT(*) / 17 AS sequences 
+								FROM $db_table 
+								WHERE ".($user_id ? "anonID = '$user_id' 
+								AND " : '')." `timestamp` 
+								BETWEEN '{$rangeDays[0]}' AND '{$rangeDays[1]}' 
+								AND (item = 'Learning Pathway' OR parentitem = 'Learning Pathway') 
+								GROUP BY HOUR(`timestamp`)");
 			
 			while (($row = mysql_fetch_object($res)) !== FALSE) {
 				$sequenceIndex[$row->hour] = $row->sequences;
 			}
 			
 		} else {
-			$res = mysql_query("SELECT DATE(`timestamp`) AS date, COUNT(*) / 17 AS sequences FROM $db_table WHERE ".($user_id ? "anonID = '$user_id' AND " : '')." `timestamp` BETWEEN '{$rangeDays[0]}' AND '{$rangeDays[1]}' AND (item = 'Learning Pathway' OR parentitem = 'Learning Pathway') GROUP BY DATE(`timestamp`);
+			$res = mysql_query("SELECT DATE(`timestamp`) AS date, COUNT(*) / 17 AS sequences 
+								FROM $db_table 
+								WHERE ".($user_id ? "anonID = '$user_id' 
+								AND " : '')." `timestamp` 
+								BETWEEN '{$rangeDays[0]}' AND '{$rangeDays[1]}' 
+								AND (item = 'Learning Pathway' OR parentitem = 'Learning Pathway') 
+								GROUP BY DATE(`timestamp`);
 			");
 			
 			while (($row = mysql_fetch_object($res)) !== FALSE) {
@@ -95,14 +107,26 @@ function trimSequences($rangeDays = 1, $user_id = FALSE, $data) {
 	} else {
 	
 		if ($rangeDays < 2) {
-			$res = mysql_query("SELECT CONCAT(HOUR(`timestamp`), ':00') AS hour, COUNT(*) / 17 AS sequences FROM $db_table WHERE ".($user_id ? "anonID = '$user_id' AND " : '')." `timestamp` BETWEEN NOW() - INTERVAL ".($rangeDays * 24)." HOUR AND NOW() AND (item = 'Learning Pathway' OR parentitem = 'Learning Pathway') GROUP BY HOUR(`timestamp`)");
+			$res = mysql_query("SELECT CONCAT(HOUR(`timestamp`), ':00') AS hour, COUNT(*) / 17 AS sequences 
+								FROM $db_table 
+								WHERE ".($user_id ? "anonID = '$user_id' 
+								AND " : '')." `timestamp` 
+								BETWEEN NOW() - INTERVAL ".($rangeDays * 24)." HOUR 
+								AND NOW() AND (item = 'Learning Pathway' OR parentitem = 'Learning Pathway') 
+								GROUP BY HOUR(`timestamp`)");
 			
 			while (($row = mysql_fetch_object($res)) !== FALSE) {
 				$sequenceIndex[$row->hour] = $row->sequences;
 			}
 			
 		} else {
-			$res = mysql_query("SELECT DATE(`timestamp`) AS date, COUNT(*) / 17 AS sequences FROM $db_table WHERE ".($user_id ? "anonID = '$user_id' AND " : '')." `timestamp` BETWEEN NOW() - INTERVAL $rangeDays DAY AND NOW() AND (item = 'Learning Pathway' OR parentitem = 'Learning Pathway') GROUP BY DATE(`timestamp`);
+			$res = mysql_query("SELECT DATE(`timestamp`) AS date, COUNT(*) / 17 AS sequences 
+								FROM $db_table 
+								WHERE ".($user_id ? "anonID = '$user_id' 
+								AND " : '')." `timestamp` 
+								BETWEEN NOW() - INTERVAL $rangeDays DAY 
+								AND NOW() AND (item = 'Learning Pathway' OR parentitem = 'Learning Pathway') 
+								GROUP BY DATE(`timestamp`);
 			");
 			
 			while (($row = mysql_fetch_object($res)) !== FALSE) {

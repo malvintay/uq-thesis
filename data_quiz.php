@@ -135,15 +135,15 @@ function durationByModnum($user_id = FALSE, $modnum = FALSE) {
 		$res = mysql_query("SELECT SUBSTR(qw.`module`, 1, 1) AS modnum, qw.`module`, SUM(duration) AS dur FROM quizz_weekly qw".($modnum != FALSE ? " WHERE modnum LIKE '$modnum%'" : '')." GROUP BY modnum ORDER BY modnum");
 	} else {
 	
-	
-		if (($res = mysql_query("SELECT * FROM quiz_summary WHERE user_id = '$user_id'")) != FALSE) {
+		if (($res = mysql_query("SELECT * FROM quizz_weekly WHERE user_id = '$user_id'")) != FALSE) {
+		
 			if (mysql_num_rows($res) == 0) {
 				//user doesn't exist
 				$data['error'] = 1;
 				$data['message'] = "User id $user_id doesn't exist";
 			} else {
 			
-				$res = mysql_query("SELECT SUBSTR(qw.`module`, 1, 1) AS modnum, qw.`module`, SUM(duration) AS dur FROM quizz_weekly qw WHERE user_id = '$user_id'".($modnum != FALSE ? " AND modnum LIKE '$modnum%'" : '')." GROUP BY modnum ORDER BY modnum;");
+				$res = mysql_query("SELECT SUBSTR(qw.`module`, 1, 1) AS modnum, qw.`module`, SUM(duration) AS dur FROM quizz_weekly qw WHERE user_id = '$user_id'".($modnum != FALSE ? " AND modnum LIKE '$modnum%'" : '')." GROUP BY modnum ORDER BY modnum");
 			
 			}
 		}

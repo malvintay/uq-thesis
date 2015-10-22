@@ -201,7 +201,7 @@ reports.quiz_drilldown = {
 $(document).ready(function() {
 	reports.showReport('quiz_temporal');
 	reports.showReport('quiz_summary');
-	
+	setTimeout(function() {reports.conf.loadedModules.push('quiz_summary');}, 600);
 	$('#back-to-donut button').click(function() {
 		$('#back-to-donut').addClass('hidden');
 		reports.showReport('quiz_temporal');

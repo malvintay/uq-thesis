@@ -11,7 +11,7 @@ function midSemesterPie($user_id = FALSE) {
 	$data = array();
 
 	//averages
-	$res = mysql_query("SELECT AVG(MCQ) AS MCQ, AVG(part_b) AS part_b, AVG(part_c) AS part_c, AVG(MCQ+part_b+part_c) AS avg_total FROM mid_semester WHERE  deferred = 0 AND withdrawn = 0") or die(mysql_error());
+	$res = mysql_query("SELECT AVG(MCQ) AS MCQ, AVG(part_b) AS part_b, AVG(part_c) AS part_c, AVG(MCQ*2+part_b+part_c) AS avg_total FROM mid_semester WHERE  deferred = 0 AND withdrawn = 0") or die(mysql_error());
 	
 	$res = mysql_fetch_object($res);
 	
@@ -44,7 +44,7 @@ function midSemesterPie($user_id = FALSE) {
 
 		//actual marks
 		
-		$res = mysql_query("SELECT MAX(MCQ) AS MCQ, MAX(part_b) AS part_b, MAX(part_c) AS part_c FROM mid_semester WHERE student_id='$user_id' AND deferred = 0 AND withdrawn = 0");
+		$res = mysql_query("SELECT MAX(MCQ)*2 AS MCQ, MAX(part_b) AS part_b, MAX(part_c) AS part_c FROM mid_semester WHERE student_id='$user_id' AND deferred = 0 AND withdrawn = 0");
 		
 		$res = mysql_fetch_object($res);
 
@@ -79,7 +79,7 @@ function midSemesterPlot($user_id = FALSE) {
 	while (($row = mysql_fetch_object($res)) !== FALSE) {
 		$point = array();
 		$point['x'] = (int)$row->attempts;
-		$point['y'] = $row->MCQ + $row->part_b + $row->part_c;
+		$point['y'] = $row->MCQ *2+ $row->part_b + $row->part_c;
 		$point['user_id'] = $row->user_id;
 		$point['MCQ'] = $row->MCQ;
 		$point['B'] = $row->part_b;

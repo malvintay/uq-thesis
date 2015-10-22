@@ -33,14 +33,14 @@ reports.mid_semester_pie = {
 	            * */
 	        },
 	        title: {
-	            text: 'Average grade '+data.average,
+	            text: 'Average Grade: '+data.average,
 	            align: 'center',
 	            verticalAlign: 'middle',
 	            y: 0,
 	            useHTML: true
 	        },
 	        subtitle: {
-				text: reports.conf.userId == false ? '' : 'User mark '+data.user_mark,
+				text: reports.conf.userId == false ? '' : 'User Mark: '+data.user_mark,
 	            align: 'center',
 	            verticalAlign: 'middle',
 	            y: 30,
@@ -62,10 +62,10 @@ reports.mid_semester_pie = {
 								//user has higher score than avg?
 								var higher = this.user_mark >= this.value;
 								
-								var subtitleText = 'User mark '+this.user_mark;
+								var subtitleText = 'User Mark: '+this.user_mark;
 	                    	
 	                        	reports.mid_semester_pie.chart.highcharts().setTitle({
-									text : this.name + ' average grade '+this.value
+									text : this.name + ' Average Grade: '+this.value
 	                        	}, reports.conf.userId == false ? undefined : {
 									text : subtitleText,
 									style: {
@@ -84,9 +84,9 @@ reports.mid_semester_pie = {
 								}
 	                        
 								reports.mid_semester_pie.chart.highcharts().setTitle({
-									text : 'Average grade '+data.average
+									text : 'Average Grade: '+data.average
 	                        	}, {
-									text : reports.conf.userId == false ? '' : 'User mark '+data.user_mark,
+									text : reports.conf.userId == false ? '' : 'User Marks: '+data.user_mark,
 									style: {
 										color: (avg_higher ? 'green' : 'red')
 									}
@@ -110,7 +110,7 @@ reports.mid_semester_pie = {
 	        },
 	        series: [{
 	            type: 'pie',
-	            name: 'Average grade',
+	            name: 'Average Grade',
 	            innerSize: '65%',
 	            data: data.series
 	        }]
@@ -149,7 +149,7 @@ reports.mid_semester_plot = {
 	            zoomType: 'xy'
 	        },
 	        title: {
-	            text: 'Users mark/attempts'
+	            text: 'Mid-Semester Marks/Formative Quiz Attempts'
 	        },
 	        xAxis: {
 	            title: {
@@ -198,7 +198,7 @@ reports.mid_semester_plot = {
 	                },
 	                tooltip: {
 	                    headerFormat: '<b>{series.name}</b><br>',
-	                    pointFormat: 'Attempts {point.x}, Mark {point.y}, User ID: {point.user_id}'
+	                    pointFormat: 'Attempts: {point.x}, Marks: {point.y}, User ID: {point.user_id}'
 	                }
 	            }
 	        },
